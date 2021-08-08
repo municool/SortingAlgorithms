@@ -7,33 +7,23 @@ namespace SortingAlgorithms
     {
         static void Main(string[] args)
         {
+            if(args.Length == 0)
+            {
+                Console.WriteLine("Invalid args!");
+                return;
+            }
 
-            //Bubblesort --> https://de.wikipedia.org/wiki/Bubblesort
-            Console.WriteLine("--------------------Bubblesort-----------------------");
-           
-            var stopwatch = new Stopwatch();
-            var bubbleSorter = new BubbleSort();
-            var unsortedArray = GenerateList(50000);
-            
-            //Console.WriteLine("Unsorted List: " + ArrayToString(unsortedArray));
-            
-            stopwatch.Start();
-            var sortedList = bubbleSorter.Sort(unsortedArray);
-            stopwatch.Stop();
+            var command = args[0].ToLower();
 
-            //Console.WriteLine("Sorted List: " + ArrayToString(sortedList));
-            Console.WriteLine("Time: " + stopwatch.Elapsed.ToString());
-
-            //Quicksort --> https://de.wikipedia.org/wiki/Quicksort
-            var quickSorter = new Quicksort();
-            //Console.WriteLine("Unsorted List: " + ArrayToString(unsortedArray));
-
-            stopwatch.Start();
-            sortedList = quickSorter.Sort(unsortedArray);
-            stopwatch.Stop();
-
-            //Console.WriteLine("Sorted List: " + ArrayToString(sortedList));
-            Console.WriteLine("Time: " + stopwatch.Elapsed.ToString());
+            switch (command)
+            {
+                case "quicksort":
+                    Quicksort(GenerateList(int.Parse(args[1])));
+                    return;
+                case "bubblesort":
+                    Bubblesort(GenerateList(int.Parse(args[1])));
+                    return;
+            }
 
             //Heapsort --> https://de.wikipedia.org/wiki/Heapsort
 
@@ -47,6 +37,42 @@ namespace SortingAlgorithms
 
 
             Console.ReadLine();
+        }
+
+        private static void Bubblesort(int[] input)
+        {
+            var stopwatch = new Stopwatch();
+
+            //Bubblesort --> https://de.wikipedia.org/wiki/Bubblesort
+            Console.WriteLine("--------------------Bubblesort-----------------------");
+
+            var bubbleSorter = new BubbleSort();
+            //Console.WriteLine("Unsorted List: " + ArrayToString(unsortedArray));
+
+            stopwatch.Start();
+            var sortedList = bubbleSorter.Sort(input);
+            stopwatch.Stop();
+
+            //Console.WriteLine("Sorted List: " + ArrayToString(sortedList));
+            Console.WriteLine("Time: " + stopwatch.Elapsed.ToString());
+        }
+
+        private static void Quicksort(int[] input)
+        {
+            var stopwatch = new Stopwatch();
+
+            //Quicksort --> https://de.wikipedia.org/wiki/Quicksort
+            Console.WriteLine("--------------------Quicksort-----------------------");
+
+            var quickSorter = new Quicksort();
+            //Console.WriteLine("Unsorted List: " + ArrayToString(unsortedArray));
+
+            stopwatch.Start();
+            var sortedList = quickSorter.Sort(input);
+            stopwatch.Stop();
+
+            //Console.WriteLine("Sorted List: " + ArrayToString(sortedList));
+            Console.WriteLine("Time: " + stopwatch.Elapsed.ToString());
         }
 
 
